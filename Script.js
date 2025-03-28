@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("uploads"));
 
-// MySQL Database Connection
+
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",  
@@ -78,7 +78,7 @@ app.post("/submit", upload.fields([
     });
 });
 
-// Fetch All Employees
+
 app.get("/employees", (req, res) => {
     const sql = "SELECT * FROM employees";
     db.query(sql, (err, results) => {
