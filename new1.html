@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Onboarding Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+    header {
+      position: relative;
+      text-align: center;
+      height: 120px; 
+      background-color: #5f06a8;
+      color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      width: 98%;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+    }
+header p{
+    font-weight: 100;
+      font-size: 18px;
+      margin-top: 10px;
+}
+  
+    @keyframes moveCircles {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-50%) translateX(-50%);
+      }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+
+    .banner-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: moveCircles 10s infinite linear;
+    }
+
+    .circle:nth-child(1) {
+      top: 10%;
+      left: 20%;
+      animation-duration: 8s;
+    }
+
+    .circle:nth-child(2) {
+      top: 50%;
+      left: 70%;
+      animation-duration: 12s;
+    }
+
+    .circle:nth-child(3) {
+      top: 80%;
+      left: 40%;
+      animation-duration: 15s;
+    }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-sections {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-section {
+            flex: 1 1 calc(50% - 20px); /* Two sections in one row */
+            padding: 20px;
+           
+        }
+
+        h2 {
+            display: flex;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #ffffff;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #63008a;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        label.required::after {
+            content: " *";
+            color: red;
+        }
+        label span{
+            font-size: .9em;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], 
+        input[type="date"], input[type="file"], select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1em;
+            border-color: #005bb5;
+            background-color: #eef7ff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border-color: #005bb5;
+            background-color: #eef7ff;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, 
+        input[type="date"]:focus, input[type="file"]:focus, select:focus, textarea:focus {
+            border-color: #0073e6;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 115, 230, 0.3);
+            outline: none;
+        }
+
+        input[type="text"]:hover, input[type="email"]:hover, input[type="tel"]:hover, 
+        input[type="date"]:hover, input[type="file"]:hover, select:hover, textarea:hover {
+            border-color: #005bb5;
+            background-color: #eef7ff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1em;
+            border-color: #005bb5;
+            background-color: #eef7ff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #0073e6;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 115, 230, 0.3);
+            outline: none;
+        }
+
+        input[type="number"]:hover {
+            border-color: #005bb5;
+            background-color: #eef7ff;
+        }
+
+        .button {
+            color: rgb(9, 55, 205);
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid rgb(55, 0, 128);
+            padding: 10px 20px;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: bold;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            background: transparent;
+            position: relative;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            border-radius: 30px;
+            width: 40%;
+            height: 3em;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+
+        .button::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            top: 0;
+            left: 0;
+            transform: skewX(45deg);
+            background-color: rgb(49, 0, 128);
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        .button:hover {
+            color: #fff;
+            background-color: rgb(53, 0, 128);
+        }
+
+        .button:hover::before {
+            width: 100%;
+        }
+
+        .error {
+            color: #ff4d4d;
+            font-size: 0.875rem;
+            display: none;
+            margin-top: 3px;
+        }
+
+        input:invalid {
+            border-color: #283e85;
+        }
+
+        .success-message {
+            color: #28a745;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        @media screen and (max-width: 1024px) {
+            form {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .form-section {
+                flex: 1 1 100%; 
+            }
+
+            .banner {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .button {
+                width: 60%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 95%;
+                padding: 10px;
+            }
+
+            .form-section {
+                padding: 15px;
+            }
+
+            .banner {
+                font-size: 12px;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            input, select, textarea {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            .button {
+                width: 80%;
+                font-size: 16px;
+                padding: 8px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .banner {
+                width: 95%;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            .banner h1 {
+                font-size: 20px;
+            }
+
+            .banner p {
+                font-size: 12px;
+            }
+
+            form {
+                width: 100%;
+                padding: 8px;
+            }
+
+            h2 {
+                font-size: 1.1em;
+            }
+
+            .button {
+                width: 90%;
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+        .popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    font-size: 16px;
+    animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+textarea{
+    resize: none;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner-background">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <h1>Employee Offboarding Form</h1>
+        <p>Submit your Offboarding details here</p>
+      </header>
+
+    <form id="onboardingForm" enctype="multipart/form-data">
+      
+      <div class="form-section">
+        <h3>Personal Details</h3>
+        <div class="form-group">
+          <label for="full_name">Full Name:</label>
+          <input type="text" id="full_name" name="full_name" required placeholder="Enter your full name">
+          <span id="fullNameError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required placeholder="Enter Email address">
+          <span id="emailError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" id="mobile" name="mobile" required placeholder="Enter your mobile number">
+          <span id="mobileError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+          <span id="dobError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea id="address" name="address" required placeholder="Enter your Current Address"></textarea>
+          <span id="addressError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="state">State:</label>
+          <select id="state" name="state" required>
+            <option value="">Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Puducherry">Puducherry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input type="text" id="pincode" name="pincode" required placeholder="Enter Your Zipcode">
+          <span id="pincodeError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="permanent_address">Permanent Address:</label>
+          <textarea id="permanent_address" name="permanent_address" required placeholder="Enter Your permanent Address"></textarea>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Emergency Contact</h3>
+        <div class="form-group">
+          <label for="emergency_name">Emergency Contact Name:</label>
+          <input type="text" id="emergency_name" name="emergency_name" required placeholder="Enter emergency contact name">
+          <span id="emergencyNameError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="emergency_mobile">Emergency Contact Number:</label>
+          <input type="tel" id="emergency_mobile" name="emergency_mobile" required placeholder="Enter emergency contact number">
+          <span id="emergencyMobileError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="relation">Relation:</label>
+          <select id="relation" name="relation" required>
+            <option value="">Select Relation</option>
+            <option value="Father">Father</option>
+                    <option value="Mother">Mother</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Sibling">Sibling</option>
+                    <option value="Guardian">Guardian</option>
+                    <option value="Friend">Friend</option>
+                    <option value="Relative">Relative</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Bank Details</h3>
+        <div class="form-group">
+          <label for="bank_name">Bank Name:</label>
+          <input type="text" id="bank_name" name="bank_name" required placeholder="Enter Bank Name">
+          <span id="bankNameError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="account_number">Account Number:</label>
+          <input type="text" id="account_number" name="account_number" required placeholder="Enter Account Number">
+        </div>
+        <div class="form-group">
+          <label for="ifsc">IFSC Code:</label>
+          <input type="text" id="ifsc" name="ifsc" required placeholder="Enter IFSC Code">
+          <span id="ifscError" class="error"></span>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Job Details</h3>
+        <div class="form-group">
+          <label for="job_role">Job Role:</label>
+          <select id="job_role" name="job_role" required>
+            <option value="">Select Job Role</option>
+            <option value="Software Developer">Software Developer</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="Database Administrator">Backend Developer</option>
+            <option value="Software Tester">Software Tester</option>
+            <option value="System Administrator">Java Developer</option>
+            <option value="Security Analyst">Python Developer</option>
+            <option value="Cloud Engineer">Cloud Engineer</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="Business Analyst">Business Analyst</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <select id="department" name="department" required>
+            <option value="">Select Department</option>
+            <option value="IT">IT</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Operations">Operations</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="join_date">Join Date:</label>
+          <input type="date" id="join_date" name="join_date" required>
+          <span id="joinDateError" class="error"></span>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Health Insurance</h3>
+        <div class="form-group">
+          <label for="insurance_provider">Insurance Provider:</label>
+          <input type="text" id="insurance_provider" name="insurance_provider" placeholder="Enter Insurance Provider">
+        </div>
+        <div class="form-group">
+          <label for="policy_number">Policy Number:</label>
+          <input type="text" id="policy_number" name="policy_number" placeholder="Enter Policy Number">
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Upload Documents</h3>
+        <div class="form-group">
+          <label for="certifications">Extra Certifications (PDF only):</label>
+          <input type="file" id="certifications" name="certifications" accept=".pdf">
+          <span id="certificationsError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="id_proof">ID Proof (PDF, JPG, PNG):</label>
+          <input type="file" id="id_proof" name="id_proof" accept=".pdf,.jpg,.png" required>
+          <span id="idProofError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="contract">Signed Employment Contract (PDF only):</label>
+          <input type="file" id="contract" name="contract" accept=".pdf" required>
+          <span id="contractError" class="error"></span>
+        </div>
+      </div>
+  
+      <div class="form-section">
+        <h3>Upload Educational Documents</h3>
+        <div class="form-group">
+          <label for="ssc">High School Certificate (PDF only):</label>
+          <input type="file" id="ssc" name="ssc" accept=".pdf" required>
+          <span id="sscError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="intermediate">Intermediate/Diploma Certificate (PDF only):</label>
+          <input type="file" id="intermediate" name="intermediate" accept=".pdf" required>
+          <span id="intermediateError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="graduation">Higher Education Certificate (PDF only):</label>
+          <input type="file" id="graduation" name="graduation" accept=".pdf" required>
+          <span id="graduationError" class="error"></span>
+        </div>
+      </div>
+  
+      <button class="button" type="submit">Submit</button>
+    </form>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Date of Birth Validation (Age 20-60)
+        const dobInput = document.getElementById("dob");
+        const today = new Date();
+        const minAge = 20;
+        const maxAge = 60;
+        const minDate = new Date(today.getFullYear() - maxAge, today.getMonth(), today.getDate()).toISOString().split("T")[0];
+        const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate()).toISOString().split("T")[0];
+        dobInput.setAttribute("min", minDate);
+        dobInput.setAttribute("max", maxDate);
+  
+        // Join Date Validation (Up to 6 months from today)
+        const joinDateInput = document.getElementById("join_date");
+        const maxFutureDate = new Date();
+        maxFutureDate.setMonth(maxFutureDate.getMonth() + 6);
+        const maxAllowedDate = maxFutureDate.toISOString().split("T")[0];
+        const todayFormatted = today.toISOString().split("T")[0];
+        joinDateInput.setAttribute("min", todayFormatted);
+        joinDateInput.setAttribute("max", maxAllowedDate);
+  
+        // Add event listeners for real-time validation
+        document.getElementById("full_name").addEventListener("input", validateFullName);
+        document.getElementById("email").addEventListener("input", validateEmail);
+        document.getElementById("mobile").addEventListener("input", validateMobile);
+        document.getElementById("pincode").addEventListener("input", validatePincode);
+        document.getElementById("emergency_name").addEventListener("input", validateEmergencyName);
+        document.getElementById("emergency_mobile").addEventListener("input", validateEmergencyNumber);
+        document.getElementById("bank_name").addEventListener("input", validateBankName);
+        document.getElementById("ifsc").addEventListener("input", validateIFSC);
+        document.getElementById("dob").addEventListener("change", validateDOB);
+        document.getElementById("join_date").addEventListener("change", validateJoinDate);
+      });
+  
+      // Generic field validation
+      function validateField(inputId, errorId, pattern, errorMsg) {
+        const input = document.getElementById(inputId).value.trim();
+        const error = document.getElementById(errorId);
+  
+        if (!pattern.test(input)) {
+          error.textContent = errorMsg;
+          error.style.display = "inline";
+          document.getElementById(inputId).style.border = "1px solid #ff4d4d";
+          return false;
+        } else {
+          error.style.display = "none";
+          document.getElementById(inputId).style.border = "1px solid #6a11cb";
+          return true;
+        }
+      }
+  
+      // Individual field validations
+      function validateFullName() {
+        return validateField("full_name", "fullNameError", /^[A-Za-z]+(?: [A-Za-z]+)*$/, "Invalid name format.");
+      }
+  
+      function validateEmergencyName() {
+        return validateField("emergency_name", "emergencyNameError", /^[A-Za-z]+(?: [A-Za-z]+)*$/, "Invalid name format.");
+      }
+  
+      function validateBankName() {
+        return validateField("bank_name", "bankNameError", /^[A-Za-z]+(?: [A-Za-z]+)*$/, "Invalid bank name format.");
+      }
+  
+      function validateEmail() {
+        return validateField("email", "emailError", /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, "Invalid email format.");
+      }
+  
+      function validateMobile() {
+        return validateField("mobile", "mobileError", /^[6789]\d{9}$/, "Must be exactly 10 digits and start with 6, 7, 8, or 9.");
+      }
+  
+      function validatePincode() {
+        return validateField("pincode", "pincodeError", /^\d{6}$/, "Must be exactly 6 digits.");
+      }
+  
+      function validateEmergencyNumber() {
+        const mobile = document.getElementById("mobile").value.trim();
+        const emergencyNumber = document.getElementById("emergency_mobile").value.trim();
+        const error = document.getElementById("emergencyMobileError");
+  
+        if (!/^[6789]\d{9}$/.test(emergencyNumber)) {
+          error.textContent = "Must be exactly 10 digits and start with 6, 7, 8, or 9.";
+          error.style.display = "inline";
+          document.getElementById("emergency_mobile").style.border = "1px solid #ff4d4d";
+          return false;
+        } else if (mobile === emergencyNumber) {
+          error.textContent = "Emergency contact number cannot be the same as the mobile number.";
+          error.style.display = "inline";
+          document.getElementById("emergency_mobile").style.border = "1px solid #ff4d4d";
+          return false;
+        } else {
+          error.style.display = "none";
+          document.getElementById("emergency_mobile").style.border = "1px solid #6a11cb";
+          return true;
+        }
+      }
+  
+      function validateDOB() {
+        const dob = document.getElementById("dob").value;
+        const error = document.getElementById("dobError");
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+  
+        if (age < 20 || age > 60) {
+          error.textContent = "Age must be between 20 and 60.";
+          error.style.display = "inline";
+          document.getElementById("dob").style.border = "1px solid #ff4d4d";
+          return false;
+        } else {
+          error.style.display = "none";
+          document.getElementById("dob").style.border = "1px solid #6a11cb";
+          return true;
+        }
+      }
+  
+      function validateJoinDate() {
+        const joinDate = document.getElementById("join_date").value;
+        const error = document.getElementById("joinDateError");
+        const today = new Date();
+        const selectedDate = new Date(joinDate);
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 6);
+  
+        if (selectedDate < today || selectedDate > maxDate) {
+          error.textContent = "Join date must be between today and 6 months from now.";
+          error.style.display = "inline";
+          document.getElementById("join_date").style.border = "1px solid #ff4d4d";
+          return false;
+        } else {
+          error.style.display = "none";
+          document.getElementById("join_date").style.border = "1px solid #6a11cb";
+          return true;
+        }
+      }
+  
+      function validateIFSC() {
+        return validateField("ifsc", "ifscError", /^[A-Z]{4}[0-9A-Z]{7}$/, "Invalid IFSC Code.");
+      }
+  
+      // File upload validation
+      function validateFile(inputId, errorId, allowedExtensions) {
+        const fileInput = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        const file = fileInput.files[0];
+  
+        if (fileInput.required && !file) {
+          error.textContent = "This file is required.";
+          error.style.display = "inline";
+          return false;
+        }
+  
+        if (file) {
+          const extension = file.name.split(".").pop().toLowerCase();
+          if (!allowedExtensions.includes(extension)) {
+            error.textContent = `Only ${allowedExtensions.join(", ")} files are allowed.`;
+            error.style.display = "inline";
+            return false;
+          }
+          
+          if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            error.textContent = "File size must be less than 5MB.";
+            error.style.display = "inline";
+            return false;
+          }
+        }
+  
+        error.style.display = "none";
+        return true;
+      }
+  
+      // Form submission handler
+      document.getElementById("onboardingForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+  
+        // Run all validations
+        const validations = [
+          validateFullName(),
+          validateEmail(),
+          validateMobile(),
+          validatePincode(),
+          validateEmergencyName(),
+          validateEmergencyNumber(),
+          validateBankName(),
+          validateDOB(),
+          validateIFSC(),
+          validateJoinDate(),
+          validateFile("certifications", "certificationsError", ["pdf"]),
+          validateFile("id_proof", "idProofError", ["pdf", "jpg", "png"]),
+          validateFile("contract", "contractError", ["pdf"]),
+          validateFile("ssc", "sscError", ["pdf"]),
+          validateFile("intermediate", "intermediateError", ["pdf"]),
+          validateFile("graduation", "graduationError", ["pdf"])
+        ];
+  
+        // Check if all validations passed
+        if (validations.every(validation => validation === true)) {
+          const formData = new FormData(this);
+          
+          // Disable submit button during submission
+          const submitBtn = event.target.querySelector('button[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Submitting...";
+  
+          fetch("http://localhost:3000/submit", {
+            method: "POST",
+            body: formData
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then(data => {
+            alert("Form submitted successfully!");
+            this.reset();
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("Error submitting form. Please try again.");
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit";
+          });
+        } else {
+          alert("Please fix the errors before submitting.");
+          // Scroll to the first error
+          const firstError = document.querySelector('.error[style="display: inline;"]');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    </script>
+  </body>
+  </html>
