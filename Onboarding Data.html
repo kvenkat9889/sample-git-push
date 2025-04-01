@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -337,7 +338,7 @@ header p{
             const employeeContainer = document.getElementById('employeeContainer');
 
             // Fetch employee data from API
-            fetch("http://localhost:3000/employees")
+            fetch("http://http://54.226.109.108/:9100/employees")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -399,16 +400,16 @@ header p{
 
                             <h4><i class="fas fa-file-alt"></i> Documents</h4>
                             <div class="documents-grid">
-                                <a href="http://localhost:3000/${emp.id_proof}" download="${emp.full_name}-ID-Proof" class="doc-btn">
+                                <a href="http://http://54.226.109.108/:91000/${emp.id_proof}" download="${emp.full_name}-ID-Proof" class="doc-btn">
                                     <i class="fas fa-id-card"></i> ID Proof
                                 </a>
-                                <a href="http://localhost:3000/${emp.ssc}" download="${emp.full_name}-SSC-Certificate" class="doc-btn">
+                                <a href="http://http://54.226.109.108/:9100/${emp.ssc}" download="${emp.full_name}-SSC-Certificate" class="doc-btn">
                                     <i class="fas fa-file-certificate"></i> SSC
                                 </a>
-                                <a href="http://localhost:3000/${emp.intermediate}" download="${emp.full_name}-Intermediate-Certificate" class="doc-btn">
+                                <a href="http://http://54.226.109.108/:9100/${emp.intermediate}" download="${emp.full_name}-Intermediate-Certificate" class="doc-btn">
                                     <i class="fas fa-file-alt"></i> Intermediate
                                 </a>
-                                <a href="http://localhost:3000/${emp.graduation}" download="${emp.full_name}-Graduation-Certificate" class="doc-btn">
+                                <a href="http://http://54.226.109.108/:9100/${emp.graduation}" download="${emp.full_name}-Graduation-Certificate" class="doc-btn">
                                     <i class="fas fa-graduation-cap"></i> Graduation
                                 </a>
                             </div>
