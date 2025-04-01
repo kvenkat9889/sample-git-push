@@ -819,7 +819,7 @@ textarea{
           submitBtn.disabled = true;
           submitBtn.textContent = "Submitting...";
   
-          fetch("http://localhost:3000/submit", {
+          fetch("http://44.223.27.47:9100/submit", {
             method: "POST",
             body: formData
           })
@@ -833,10 +833,7 @@ textarea{
             alert("Form submitted successfully!");
             this.reset();
           })
-          .catch(error => {
-            console.error("Error:", error);
-            alert("Error submitting form. Please try again.");
-          })
+
           .finally(() => {
             submitBtn.disabled = false;
             submitBtn.textContent = "Submit";
