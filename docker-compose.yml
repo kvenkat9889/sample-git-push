@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # Frontend Service
+  frontend:
+    image: kvenkat9889/frontend-onboarding
+    container_name: frontend-onboarding
+    ports:
+      - "8881:80"  # Map host port 8881 to container's port 80
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://frontend-onboarding:80/"]  # Check via container name
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
+
+  # HR Portal Service
+  hr-portal:
+    image: kvenkat9889/hr-portal  # Assuming this image exists, replace if necessary
+    container_name: hr-onboarding
+    ports:
+      - "8882:80"  # Map host port 8882 to container's port 80
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://hr-onboarding:80/"]  # Check via container name
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
+
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=new_employee_db
+    ports:
+      - "5433:5432"  # Expose port 5432 for external access to PostgreSQL (optional)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent storage for database data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "admin", "-d", "new_employee_db"]
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+
+  # API Service (Backend)
+  api:
+    build: .
+    container_name: api
+    ports:
+      - "3000:3000"  # Map the backend API to port 3000
+    volumes:
+      - ./uploads:/uploads  # Mount the uploads folder to store uploaded files
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres-db  # Use the container name 'postgres-db' to connect to the DB
+      - DB_USER=admin
+      - DB_PASSWORD=admin123
+      - DB_NAME=new_employee_db
+      - DB_PORT=5432
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://api:3000/health"]  # Check via container name
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
+
+volumes:
+  postgres_data:
+    driver: local
+

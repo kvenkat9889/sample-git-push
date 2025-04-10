@@ -843,7 +843,7 @@ async function saveEmployee(event) {
     try {
         
        
-        const response = await fetch("http://localhost:3000/save-employee", {
+        const response = await fetch("http://api:3000/save-employee", {
             method: "POST",
             body: formData
         });
